@@ -1,71 +1,113 @@
-"use client"
+"use client";
 
 import Link from "next/link";
-import SiteLogo from "@/assets/logo.svg"
-import {CodeXml, Feather, MenuIcon, Newspaper, Wallet2} from "lucide-react";
-import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet"
-import {useState} from "react";
-import {ActionButton} from "@/components/action-button";
+import SiteLogo from "@/assets/logo.svg";
+import { CodeXml, Feather, MenuIcon, Newspaper, Wallet2 } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useState } from "react";
+import { ActionButton } from "@/components/action-button";
 
 export default function SiteHeader() {
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false);
     return (
-        <>
-            <header className={"py-4 border-b max-md:backdrop-blur md:border-none sticky top-0 z-10"}>
-                <div className={"container max-md:px-4"}>
-                    <div className={"flex items-center justify-between md:border md:p-2.5 md:rounded-xl max-w-2xl mx-auto md:backdrop-blur "}>
-                        <Link href={"/"}>
-                            <div className={"border size-10 rounded-lg inline-flex items-center justify-center"}>
-                                <SiteLogo className={"size-8 h-auto"} />
-                            </div>
+        <header className="py-4 border-b bg-gradient-to-r from-purple-900 to-gray-900 backdrop-blur-md sticky top-0 z-20">
+            <div className="container max-w-7xl mx-auto px-4">
+                <div className="flex items-center justify-between">
+                    {/* Logo */}
+                    <Link href="/" className="flex items-center gap-3">
+                        <div className="border size-10 rounded-lg inline-flex items-center justify-center shadow-lg bg-gradient-to-r from-purple-500 to-pink-500">
+                            <SiteLogo className="size-8 h-auto" />
+                        </div>
+                        <span className="text-xl font-semibold text-white">AI Startup</span>
+                    </Link>
+
+                    {/* Desktop Navigation */}
+                    <nav className="hidden md:flex gap-6 items-center">
+                        <Link
+                            href="#"
+                            className="text-white/80 hover:text-white transition font-medium"
+                        >
+                            Features
                         </Link>
-                        <section className={"max-md:hidden"}>
-                            <nav className={"flex gap-8 items-center text-sm"}>
-                                <Link href={"#"} className={"text-white/70 hover:text-white transition"}>Features</Link>
-                                <Link href={"#"} className={"text-white/70 hover:text-white transition"}>Developers</Link>
-                                <Link href={"#"} className={"text-white/70 hover:text-white transition"}>Pricing</Link>
-                                <Link href={"#"} className={"text-white/70 hover:text-white transition"}>Changelog</Link>
-                            </nav>
-                        </section>
-                        <section className={"flex max-md:gap-4 items-center"}>
-                            <ActionButton label={"Join Waitlist"} />
-                            <Sheet open={isOpen} onOpenChange={setIsOpen}>
-                                <SheetTrigger>
-                                    <MenuIcon className={"size-9 md:hidden hover:text-white/70 transition"}/>
-                                </SheetTrigger>
-                                <SheetContent side={"top"} className={"p-8"}>
-                                    <div className={"inline-flex items-center center gap-3"}>
-                                        <div className={"border size-8 rounded-lg inline-flex items-center justify-center"}>
-                                            <SiteLogo className={"size-6 h-auto"}/>
+                        <Link
+                            href="#"
+                            className="text-white/80 hover:text-white transition font-medium"
+                        >
+                            Developers
+                        </Link>
+                        <Link
+                            href="#"
+                            className="text-white/80 hover:text-white transition font-medium"
+                        >
+                            Pricing
+                        </Link>
+                        <Link
+                            href="#"
+                            className="text-white/80 hover:text-white transition font-medium"
+                        >
+                            Changelog
+                        </Link>
+                    </nav>
+
+                    {/* Action Buttons */}
+                    <div className="flex items-center gap-4">
+                        <ActionButton label="Join Waitlist" className="hidden md:block" />
+                        {/* Mobile Menu Trigger */}
+                        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+                            <SheetTrigger>
+                                <MenuIcon className="size-9 text-white hover:text-white/80 transition md:hidden" />
+                            </SheetTrigger>
+                            {/* Mobile Navigation */}
+                            <SheetContent side="top" className="p-6 bg-gradient-to-b from-gray-900 to-black">
+                                <div className="flex items-center justify-between mb-6">
+                                    <div className="flex items-center gap-3">
+                                        <div className="border size-8 rounded-lg inline-flex items-center justify-center bg-gradient-to-r from-purple-500 to-pink-500">
+                                            <SiteLogo className="size-6 h-auto" />
                                         </div>
-                                        <p className={"font-bold"}>AI Startup Landing Page</p>
+                                        <span className="text-white font-bold">AI Startup</span>
                                     </div>
-                                    <div className={"mt-8 mb-4"}>
-                                        <nav className={"grid gap-4 items-center text-lg"}>
-                                            <Link href={"#"} className={"flex items-center gap-3 text-white/70 hover:text-white transition"}>
-                                                <Feather className={"size-6"} />
-                                                Features
-                                            </Link>
-                                            <Link href={"#"} className={"flex items-center gap-3 text-white/70 hover:text-white transition"}>
-                                                <CodeXml className={"size-6"} />
-                                                Developers
-                                            </Link>
-                                            <Link href={"#"} className={"flex items-center gap-3 text-white/70 hover:text-white transition"}>
-                                                <Wallet2 className={"size-6"} />
-                                                Pricing
-                                            </Link>
-                                            <Link href={"#"} className={"flex items-center gap-3 text-white/70 hover:text-white transition"}>
-                                                <Newspaper className={"size-6"} />
-                                                Changelog
-                                            </Link>
-                                        </nav>
-                                    </div>
-                                </SheetContent>
-                            </Sheet>
-                        </section>
+                                    <button
+                                        onClick={() => setIsOpen(false)}
+                                        className="text-white hover:text-white/70 transition"
+                                    >
+                                        ✕
+                                    </button>
+                                </div>
+                                <nav className="space-y-4">
+                                    <Link
+                                        href="#"
+                                        className="flex items-center gap-3 text-white/80 hover:text-white transition font-medium"
+                                    >
+                                        <Feather className="size-6" />
+                                        Features
+                                    </Link>
+                                    <Link
+                                        href="#"
+                                        className="flex items-center gap-3 text-white/80 hover:text-white transition font-medium"
+                                    >
+                                        <CodeXml className="size-6" />
+                                        Developers
+                                    </Link>
+                                    <Link
+                                        href="#"
+                                        className="flex items-center gap-3 text-white/80 hover:text-white transition font-medium"
+                                    >
+                                        <Wallet2 className="size-6" />
+                                        Pricing
+                                    </Link>
+                                    <Link
+                                        href="#"
+                                        className="flex items-center gap-3 text-white/80 hover:text-white transition font-medium"
+                                    >
+                                        <Newspaper className="size-6" />
+                                        Changelog
+                                    </Link>
+                                </nav>
+                            </SheetContent>
+                        </Sheet>
                     </div>
                 </div>
-            </header>
-        </>
-    )
+            </div>
+        </header>
+    );
 }
